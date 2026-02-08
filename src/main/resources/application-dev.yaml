@@ -1,0 +1,49 @@
+spring:
+  application:
+    name: grouppurchase
+  threads:
+    virtual:
+      enabled: true
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
+    show-sql: true
+  mvc:
+    problemdetails:
+      enabled: false
+  rabbitmq:
+    host: localhost
+    port: 5671
+    username: rba
+    password: rba
+    virtual-host: /
+
+server:
+  port: 8081
+  servlet:
+    context-path: /kata
+
+app:
+  jwt:
+    secret: T5Jj6wG8mJz6TKwsCwiKhc4m1aUqMoeAQcZKFKCvNUk=
+    cookie-name: Authorization
+    expiration-ms: 86400000
+  cors:
+    allowed-origins:
+      - "*"
+    allowed-methods:
+      - GET
+      - POST
+      - PUT
+      - DELETE
+      - OPTIONS
+    allowed-headers:
+      - "*"
+    allow-credentials: true
+  rabbitmq:
+    deadline-queue: group-purchase.deadline
+    deadline-exchange: group-purchase.deadline.exchange
+    deadline-routing-key: group-purchase.deadline
+  sse:
+    time-out: 1800000

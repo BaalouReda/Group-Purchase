@@ -1,0 +1,32 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres:15-alpine
+    container_name: postgres_db_kata_group_purchase
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: rba
+      POSTGRES_PASSWORD: rba
+      POSTGRES_DB: group-purchase
+    ports:
+      - "5437:5432"
+    volumes:
+      - postgres_db_kata_group_purchase_data:/var/lib/postgresql/data
+
+  rabbitmq:
+    image:  heidiks/rabbitmq-delayed-message-exchange:3.12.2-management
+    container_name: rabbitmq_kata_group_purchase
+    restart: unless-stopped
+    environment:
+      RABBITMQ_DEFAULT_USER: rba
+      RABBITMQ_DEFAULT_PASS: rba
+    ports:
+      - "5671:5672"
+      - "15671:15672"
+    volumes:
+      - rabbitmq_kata_group_purchase_data:/var/lib/rabbitmq
+
+volumes:
+  postgres_db_kata_group_purchase_data:
+  rabbitmq_kata_group_purchase_data:

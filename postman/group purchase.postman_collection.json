@@ -1,0 +1,357 @@
+{
+  "info": {
+    "_postman_id": "220a8189-ed4f-4d5a-807b-e402ffe274b6",
+    "name": "group purchase",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "26574312"
+  },
+  "item": [
+    {
+      "name": "auth",
+      "item": [
+        {
+          "name": "login",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{  \r\n    \"email\": \"{{user1}}\",\r\n    \"password\": \"{{password}}\" \r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseURL}}/auth/login",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "auth",
+                "login"
+              ]
+            },
+            "description": "Generated from cURL:   curl -X POST http://localhost:8081/api/auth/login \\                                                                                              \r\n    -H \"Content-Type: application/json\" \\                                                                                                          \r\n    -d '{                                                                                                                                          \r\n      \"email\": \"customer@example.com\",                                                                                                             \r\n      \"password\": \"SecurePassword123!\"                                                                                                             \r\n    }' \\                                                                                                                                           \r\n    -c cookies.txt -v   "
+          },
+          "response": []
+        },
+        {
+          "name": "login account 2",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{  \r\n    \"email\": \"{{user2}}\",\r\n    \"password\": \"{{password}}\" \r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseURL}}/auth/login",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "auth",
+                "login"
+              ]
+            },
+            "description": "Generated from cURL:   curl -X POST http://localhost:8081/api/auth/login \\                                                                                              \r\n    -H \"Content-Type: application/json\" \\                                                                                                          \r\n    -d '{                                                                                                                                          \r\n      \"email\": \"customer@example.com\",                                                                                                             \r\n      \"password\": \"SecurePassword123!\"                                                                                                             \r\n    }' \\                                                                                                                                           \r\n    -c cookies.txt -v   "
+          },
+          "response": []
+        },
+        {
+          "name": "logout",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseURL}}/auth/logout",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "auth",
+                "logout"
+              ]
+            },
+            "description": "Generated from cURL:   curl -X POST http://localhost:8081/api/auth/login \\                                                                                              \r\n    -H \"Content-Type: application/json\" \\                                                                                                          \r\n    -d '{                                                                                                                                          \r\n      \"email\": \"customer@example.com\",                                                                                                             \r\n      \"password\": \"SecurePassword123!\"                                                                                                             \r\n    }' \\                                                                                                                                           \r\n    -c cookies.txt -v   "
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "groupe purchase",
+      "item": [
+        {
+          "name": "create purchase",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "// Extract group purchase ID from response and save as environment variable",
+                  "const response = pm.response.json();",
+                  "",
+                  "if (response && response.id) {",
+                  "    pm.environment.set(\"groupPurchaseId\", response.id);",
+                  "    console.log(\"Saved groupPurchaseId:\", response.id);",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"productId\": \"750e8400-e29b-41d4-a716-446655440001\",\r\n  \"minParticipants\": 3,\r\n  \"maxParticipants\": 10,\r\n  \"deadline\": \"2026-02-04T22:22:00Z\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseURL}}/api/group-purchase",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "api",
+                "group-purchase"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get page groupe purchase",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseURL}}/api/group-purchase",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "api",
+                "group-purchase"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "0",
+                  "type": "text",
+                  "disabled": true
+                },
+                {
+                  "key": "size",
+                  "value": "3",
+                  "type": "text",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get page groupe purchase with status",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseURL}}/api/group-purchase",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "api",
+                "group-purchase"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "0",
+                  "type": "text",
+                  "disabled": true
+                },
+                {
+                  "key": "size",
+                  "value": "3",
+                  "type": "text",
+                  "disabled": true
+                },
+                {
+                  "key": "status",
+                  "value": "FINALIZED",
+                  "description": "(FINALIZED,FULL,CANCELLED,PENDING)",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "join group purchase",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseURL}}/api/group-purchase/{{groupPurchaseId}}/join",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "api",
+                "group-purchase",
+                "{{groupPurchaseId}}",
+                "join"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "sse listner",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseURL}}/sse/group-purchases",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "sse",
+                "group-purchases"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "product",
+      "item": [
+        {
+          "name": "get page of products",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "// Extract the ID of the first product and save as environment variable",
+                  "const response = pm.response.json();",
+                  "",
+                  "if (response && response.content && response.content.length > 0) {",
+                  "    const firstProductId = response.content[0].id;",
+                  "    pm.environment.set(\"productId\", firstProductId);",
+                  "    console.log(\"Saved productId:\", firstProductId);",
+                  "} else if (response && Array.isArray(response) && response.length > 0) {",
+                  "    const firstProductId = response[0].id;",
+                  "    pm.environment.set(\"productId\", firstProductId);",
+                  "    console.log(\"Saved productId:\", firstProductId);",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseURL}}/api/products?size=5&page=0",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "api",
+                "products"
+              ],
+              "query": [
+                {
+                  "key": "size",
+                  "value": "5",
+                  "type": "text"
+                },
+                {
+                  "key": "page",
+                  "value": "0",
+                  "type": "text"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get product",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"productId\": \"750e8400-e29b-41d4-a716-446655440001\",\r\n  \"minParticipants\": 3,\r\n  \"maxParticipants\": 10,\r\n  \"deadline\": \"2026-02-03T23:15:59Z\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseURL}}/api/products/{{productId}}",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "api",
+                "products",
+                "{{productId}}"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseURL",
+      "value": "",
+      "type": "default"
+    }
+  ]
+}
